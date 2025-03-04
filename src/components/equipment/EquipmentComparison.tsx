@@ -1,0 +1,194 @@
+// components/ui/EquipmentComparison.tsx
+import { Star } from 'lucide-react';
+
+// Define comparison item type
+export interface ComparisonItem {
+  id: number;
+  name: string;
+  price: string;
+  rating: number;
+  weightKg: number;
+  features: string[];
+  bestFor: string;
+  waterproof: boolean;
+  durability: 'Low' | 'Medium' | 'High';
+}
+
+interface EquipmentComparisonProps {
+  category: string;
+  items: ComparisonItem[];
+}
+
+export default function EquipmentComparison({
+  category,
+  items,
+}: EquipmentComparisonProps) {
+  return (
+    <div className='w-full overflow-x-auto pb-4'>
+      <table className='min-w-full divide-y divide-gray-700'>
+        <thead>
+          <tr>
+            <th
+              scope='col'
+              className='px-4 py-5 text-left text-xs font-medium text-gray-400 uppercase tracking-wider'
+            >
+              {category}
+            </th>
+            {items.map((item) => (
+              <th key={item.id} scope='col' className='px-4 py-5 text-center'>
+                <div className='text-white font-bold text-base'>
+                  {item.name}
+                </div>
+                <div className='text-yellow-400 mt-1'>{item.price}</div>
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody className='divide-y divide-gray-700'>
+          {/* Rating Row */}
+          <tr className='bg-gray-800'>
+            <td className='px-4 py-4 text-sm text-gray-300'>Rating</td>
+            {items.map((item) => (
+              <td key={`rating-${item.id}`} className='px-4 py-4 text-center'>
+                <div className='flex items-center justify-center'>
+                  <div className='flex text-yellow-400'>
+                    {[...Array(5)].map((_, i) => (
+                      <Star
+                        key={i}
+                        className={`h-4 w-4 ${
+                          i < Math.floor(item.rating)
+                            ? 'fill-current'
+                            : 'stroke-current fill-none'
+                        }`}
+                      />
+                    ))}
+                  </div>
+                  <span className='ml-2 text-sm text-gray-400'>
+                    {item.rating}/5
+                  </span>
+                </div>
+              </td>
+            ))}
+          </tr>
+
+          {/* Weight Row */}
+          <tr>
+            <td className='px-4 py-4 text-sm text-gray-300'>Weight</td>
+            {items.map((item) => (
+              <td
+                key={`weight-${item.id}`}
+                className='px-4 py-4 text-center text-white'
+              >
+                {item.weightKg} kg
+              </td>
+            ))}
+          </tr>
+
+          {/* Best For Row */}
+          <tr className='bg-gray-800'>
+            <td className='px-4 py-4 text-sm text-gray-300'>Best For</td>
+            {items.map((item) => (
+              <td
+                key={`bestfor-${item.id}`}
+                className='px-4 py-4 text-center text-white'
+              >
+                {item.bestFor}
+              </td>
+            ))}
+          </tr>
+
+          {/* Waterproof Row */}
+          <tr>
+            <td className='px-4 py-4 text-sm text-gray-300'>Waterproof</td>
+            {items.map((item) => (
+              <td
+                key={`waterproof-${item.id}`}
+                className='px-4 py-4 text-center'
+              >
+                <span
+                  className={`inline-flex px-2 py-1 text-xs rounded-full ${
+                    item.waterproof
+                      ? 'bg-green-900 text-green-300'
+                      : 'bg-gray-700 text-gray-400'
+                  }`}
+                >
+                  {item.waterproof ? 'Yes' : 'No'}
+                </span>
+              </td>
+            ))}
+          </tr>
+
+          {/* Durability Row */}
+          <tr className='bg-gray-800'>
+            <td className='px-4 py-4 text-sm text-gray-300'>Durability</td>
+            {items.map((item) => (
+              <td
+                key={`durability-${item.id}`}
+                className='px-4 py-4 text-center'
+              >
+                <span
+                  className={`inline-flex px-2 py-1 text-xs rounded-full ${
+                    item.durability === 'High'
+                      ? 'bg-green-900 text-green-300'
+                      : item.durability === 'Medium'
+                      ? 'bg-yellow-900 text-yellow-300'
+                      : 'bg-red-900 text-red-300'
+                  }`}
+                >
+                  {item.durability}
+                </span>
+              </td>
+            ))}
+          </tr>
+
+          {/* Features Row */}
+          <tr>
+            <td className='px-4 py-4 text-sm text-gray-300'>Key Features</td>
+            {items.map((item) => (
+              <td key={`features-${item.id}`} className='px-4 py-4 text-center'>
+                <ul className='text-sm text-white list-disc list-inside text-left'>
+                  {item.features.map((feature, idx) => (
+                    <li key={idx} className='mb-1'>
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+              </td>
+            ))}
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+// Usage example:
+/*
+const backpackComparison = [
+  {
+    id: 1,
+    name: 'Trail Seeker 45',
+    price: '$129.99',
+    rating: 4.5,
+    weightKg: 1.2,
+    features: ['Hydration Compatible', 'Rain Cover Included', 'Multiple Access Points'],
+    bestFor: 'Weekend Trips',
+    waterproof: true,
+    durability: 'High',
+  },
+  {
+    id: 2,
+    name: 'Ultralight Pack 30',
+    price: '$89.99',
+    rating: 4.0,
+    weightKg: 0.8,
+    features: ['Minimalist Design', 'Removable Frame', 'Ripstop Nylon'],
+    bestFor: 'Day Hiking',
+    waterproof: false,
+    durability: 'Medium',
+  },
+  // Add more items as needed
+];
+
+<EquipmentComparison category="Backpacks" items={backpackComparison} />
+*/
