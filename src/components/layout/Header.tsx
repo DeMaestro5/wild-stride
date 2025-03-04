@@ -19,8 +19,12 @@ const navigationItems: NavItem[] = [
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  const closeMobileMenu = () => {
+    setMobileMenuOpen(false);
+  };
+
   return (
-    <header className='relative bg-transparent'>
+    <header className='relative bg-transparent z-50'>
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
         <div className='flex justify-between items-center h-16'>
           {/* Logo */}
@@ -58,7 +62,7 @@ export default function Header() {
           <div className='md:hidden flex items-center'>
             <button
               type='button'
-              className='inline-flex items-center justify-center p-2 rounded-md text-gray-800 hover:text-green-600 focus:outline-none'
+              className='inline-flex items-center justify-center p-2 rounded-md text-gray-300 hover:text-green-600 focus:outline-none'
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-expanded={mobileMenuOpen}
             >
@@ -81,7 +85,7 @@ export default function Header() {
             animate={{ opacity: 1, height: 'auto', y: 0 }}
             exit={{ opacity: 0, height: 0, y: -10 }}
             transition={{ duration: 0.3, ease: 'easeInOut' }}
-            className='md:hidden absolute top-16 inset-x-0 z-10 bg-white/90 backdrop-blur-sm overflow-hidden rounded-b-lg shadow-lg'
+            className='md:hidden absolute top-16 inset-x-0 z-50 bg-white/90 backdrop-blur-sm overflow-hidden rounded-b-lg shadow-lg'
           >
             <motion.div
               initial={{ opacity: 0 }}
@@ -98,8 +102,8 @@ export default function Header() {
                 >
                   <Link
                     href={item.href}
-                    className='block px-3 py-2 rounded-md text-base font-medium text-gray-800 hover:text-green-600 hover:bg-gray-100/50 transition-colors duration-200'
-                    onClick={() => setMobileMenuOpen(false)}
+                    className='block w-full px-3 py-2 rounded-md text-base font-medium text-gray-800 hover:text-green-600 hover:bg-gray-100/50 transition-colors duration-200'
+                    onClick={closeMobileMenu}
                   >
                     {item.label}
                   </Link>
@@ -115,8 +119,8 @@ export default function Header() {
               >
                 <Link
                   href='/account'
-                  className='flex items-center px-3 py-2 rounded-md text-base font-medium text-gray-800 hover:text-green-600 hover:bg-gray-100/50 transition-colors duration-200'
-                  onClick={() => setMobileMenuOpen(false)}
+                  className='flex items-center w-full px-3 py-2 rounded-md text-base font-medium text-gray-800 hover:text-green-600 hover:bg-gray-100/50 transition-colors duration-200'
+                  onClick={closeMobileMenu}
                 >
                   <User className='h-5 w-5 mr-2' />
                   Account
