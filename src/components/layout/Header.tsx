@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { User, Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { usePathname } from 'next/navigation';
 
 // Define navigation items with the NavItem interface
 export interface NavItem {
@@ -18,9 +19,18 @@ const navigationItems: NavItem[] = [
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   const closeMobileMenu = () => {
     setMobileMenuOpen(false);
+  };
+
+  // Check if a given path is active (current page)
+  const isActive = (path: string) => {
+    if (path === '/') {
+      return pathname === '/';
+    }
+    return pathname?.startsWith(path);
   };
 
   return (
@@ -40,9 +50,16 @@ export default function Header() {
               <Link
                 key={item.href}
                 href={item.href}
-                className='text-gray-300 hover:text-green-600 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200'
+                className={`relative px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${
+                  isActive(item.href)
+                    ? 'text-green-600'
+                    : 'text-gray-300 hover:text-green-600'
+                }`}
               >
                 {item.label}
+                {isActive(item.href) && (
+                  <span className='absolute bottom-0 left-0 right-0 h-0.5 bg-green-600'></span>
+                )}
               </Link>
             ))}
           </nav>
@@ -51,10 +68,17 @@ export default function Header() {
           <div className='hidden md:flex items-center'>
             <Link
               href='/account'
-              className='flex items-center text-gray-300 hover:text-green-600 transition-colors duration-200'
+              className={`flex items-center relative px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${
+                isActive('/account')
+                  ? 'text-green-600'
+                  : 'text-gray-300 hover:text-green-600'
+              }`}
             >
               <User className='h-5 w-5 mr-1' />
               <span>Account</span>
+              {isActive('/account') && (
+                <span className='absolute bottom-0 left-0 right-0 h-0.5 bg-green-600'></span>
+              )}
             </Link>
           </div>
 
@@ -102,10 +126,17 @@ export default function Header() {
                 >
                   <Link
                     href={item.href}
-                    className='block w-full px-3 py-2 rounded-md text-base font-medium text-gray-800 hover:text-green-600 hover:bg-gray-100/50 transition-colors duration-200'
+                    className={`block w-full px-3 py-2 rounded-md text-base font-medium relative ${
+                      isActive(item.href)
+                        ? 'text-green-600 bg-gray-100/50'
+                        : 'text-gray-800 hover:text-green-600 hover:bg-gray-100/50'
+                    } transition-colors duration-200`}
                     onClick={closeMobileMenu}
                   >
                     {item.label}
+                    {isActive(item.href) && (
+                      <span className='absolute left-0 top-0 bottom-0 w-0.5 bg-green-600 rounded-full'></span>
+                    )}
                   </Link>
                 </motion.div>
               ))}
@@ -119,11 +150,18 @@ export default function Header() {
               >
                 <Link
                   href='/account'
-                  className='flex items-center w-full px-3 py-2 rounded-md text-base font-medium text-gray-800 hover:text-green-600 hover:bg-gray-100/50 transition-colors duration-200'
+                  className={`flex items-center w-full px-3 py-2 rounded-md text-base font-medium relative ${
+                    isActive('/account')
+                      ? 'text-green-600 bg-gray-100/50'
+                      : 'text-gray-800 hover:text-green-600 hover:bg-gray-100/50'
+                  } transition-colors duration-200`}
                   onClick={closeMobileMenu}
                 >
                   <User className='h-5 w-5 mr-2' />
                   Account
+                  {isActive('/account') && (
+                    <span className='absolute left-0 top-0 bottom-0 w-0.5 bg-green-600 rounded-full'></span>
+                  )}
                 </Link>
               </motion.div>
             </motion.div>

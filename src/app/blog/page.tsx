@@ -12,8 +12,8 @@ import Link from 'next/link';
 import { ArrowRight, Calendar, Clock, Tag, User } from 'lucide-react';
 
 // Import images - update paths as needed
-import heroImage from '../../public/images/blogpost.jpg'; // Replace with your blog hero image
-import featuredPost1 from '../../public/images/img4.jpg'; // Using existing images
+import heroImage from '../../public/images/blogpost.jpg';
+import featuredPost1 from '../../public/images/img4.jpg';
 import featuredPost2 from '../../public/images/img5.jpg';
 import featuredPost3 from '../../public/images/img6.jpg';
 import postAuthor from '../../public/images/postAuthor.jpg';
