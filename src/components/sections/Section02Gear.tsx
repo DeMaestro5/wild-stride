@@ -3,7 +3,7 @@ import img3 from '../../public/images/img3.jpg';
 
 export default function Section02Gear() {
   return (
-    <section id='section-02' className='pt-2'>
+    <section id='section-02' className='pt-0 md:pt-2'>
       <ContentCard
         number='02'
         subtitle='HIKING ESSENTIALS'

@@ -5,11 +5,11 @@ export default function Section01Hiker() {
   return (
     <section id='section-01' className='relative'>
       {/* Large section number that overflows to the hero section */}
-      <div className='absolute -top-64 left-8 md:left-24 text-gray-700 text-opacity-20 select-none pointer-events-none z-10'>
-        <span className='text-[200px] md:text-[280px] font-bold'>01</span>
+      <div className='absolute -top-48 md:-top-64 left-4 md:left-24 text-gray-700 text-opacity-20 select-none pointer-events-none z-10'>
+        <span className='text-[160px] md:text-[280px] font-bold'>01</span>
       </div>
 
-      <div className='container mx-auto px-4'>
+      <div className='container mx-auto'>
         <ContentCard
           number=''
           subtitle='GET STARTED'

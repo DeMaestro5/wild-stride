@@ -13,9 +13,9 @@ export default function Home() {
   return (
     <main className='relative min-h-screen bg-gray-900'>
       {/* Hero Section with Background Image */}
-      <div className='relative h-screen '>
+      <div className='relative h-screen'>
         {/* Background Image - Only for hero section */}
-        <div className='absolute inset-0 z-0 '>
+        <div className='absolute inset-0 z-0'>
           <Image
             src={img1}
             alt='Mountain background'
@@ -58,7 +58,7 @@ export default function Home() {
 
       {/* Content Sections - On gray background */}
       <div className='bg-gray-900 text-white'>
-        <div className='container mx-auto px-4 space-y-32 py-24'>
+        <div className='container mx-auto px-4 space-y-16 md:space-y-32 py-16 md:py-24'>
           <Section01Hiker />
           <Section02Gear />
           <Section03Map />

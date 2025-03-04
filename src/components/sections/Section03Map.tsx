@@ -3,7 +3,7 @@ import img4 from '../../public/images/img4.jpg';
 
 export default function Section03Map() {
   return (
-    <section id='section-03' className='pt-12'>
+    <section id='section-03' className='pt-0 md:pt-12'>
       <ContentCard
         number='03'
         subtitle='WHERE YOU GO IS THE KEY'
