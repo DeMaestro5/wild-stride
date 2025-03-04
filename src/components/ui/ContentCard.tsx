@@ -73,21 +73,23 @@ export default function ContentCard({
         </Link>
       </div>
 
-      {/* Image */}
+      {/* Image with Clean Zoom Effect */}
       <div
         className={`${
           imagePosition === 'right' ? 'md:col-start-2' : 'md:col-start-1'
         } relative`}
       >
-        <div className='relative rounded-lg overflow-hidden aspect-[4/3] shadow-xl'>
-          <Image
-            src={imageSrc}
-            alt={imageAlt}
-            fill
-            sizes='(max-width: 768px) 100vw, 50vw'
-            className='object-cover'
-          />
-        </div>
+        <Link href={buttonUrl} className='block'>
+          <div className='relative rounded-lg overflow-hidden aspect-[4/3] shadow-xl group cursor-pointer'>
+            <Image
+              src={imageSrc}
+              alt={imageAlt}
+              fill
+              sizes='(max-width: 768px) 100vw, 50vw'
+              className='object-cover transition-transform duration-500 ease-out transform group-hover:scale-110'
+            />
+          </div>
+        </Link>
       </div>
     </div>
   );
