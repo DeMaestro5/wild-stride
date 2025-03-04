@@ -42,7 +42,7 @@ export default function ContentCard({
       >
         <div className='flex items-start mb-6'>
           {/* Large Section Number */}
-          <span className='text-8xl font-bold text-white opacity-20 leading-none mr-4'>
+          <span className='text-8xl font-bold opacity-20 leading-none mr-4 text-white'>
             {number}
           </span>
 

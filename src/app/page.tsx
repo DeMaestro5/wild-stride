@@ -13,9 +13,9 @@ export default function Home() {
   return (
     <main className='relative min-h-screen bg-gray-900'>
       {/* Hero Section with Background Image */}
-      <div className='relative h-screen'>
+      <div className='relative h-screen '>
         {/* Background Image - Only for hero section */}
-        <div className='absolute inset-0 z-0'>
+        <div className='absolute inset-0 z-0 '>
           <Image
             src={img1}
             alt='Mountain background'

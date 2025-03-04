@@ -16,7 +16,7 @@ const footerColumns: FooterColumn[] = [
   {
     title: 'More on The Blog',
     links: [
-      { label: 'About MNTN', href: '/about' },
+      { label: 'About WildStride', href: '/about' },
       { label: 'Contributors & Writers', href: '/contributors' },
       { label: 'Write For Us', href: '/write-for-us' },
       { label: 'Contact Us', href: '/contact' },
@@ -24,7 +24,7 @@ const footerColumns: FooterColumn[] = [
     ],
   },
   {
-    title: 'More on MNTN',
+    title: 'More on WildStride',
     links: [
       { label: 'The Team', href: '/team' },
       { label: 'Jobs', href: '/jobs' },
@@ -35,8 +35,8 @@ const footerColumns: FooterColumn[] = [
 
 export default function Footer() {
   return (
-    <footer className='relative z-10 bg-gray-900 pt-16 pb-8 px-4 md:px-8'>
-      <div className='container mx-auto flex'>
+    <footer className='relative z-10 bg-gray-900 text-gray-300 pt-16 pb-8 px-4 md:px-8'>
+      <div className='container mx-auto'>
         <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
           {/* Logo and Tagline Column */}
           <div className='space-y-4'>
@@ -50,7 +50,7 @@ export default function Footer() {
               Get out there & discover your next slope, mountain & destination!
             </p>
             <p className='text-gray-500 text-xs mt-8'>
-              Copyright 2023 MNTN, Inc. Terms & Privacy
+              Copyright 2025 WildStride, Inc. Terms & Privacy
             </p>
           </div>
 
