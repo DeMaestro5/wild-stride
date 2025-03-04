@@ -16,7 +16,7 @@ export interface EquipmentReviewProps {
   consList: string[];
   verdict: string;
   reviewerName: string;
-  reviewerImage: string;
+  reviewerImage: string | StaticImageData;
   reviewerTitle: string;
 }
 
@@ -45,6 +45,8 @@ export default function EquipmentReview({
           src={productImage}
           alt={productName}
           fill
+          sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
+          priority
           className='object-cover'
         />
 
@@ -98,6 +100,7 @@ export default function EquipmentReview({
                   src={reviewerImage}
                   alt={reviewerName}
                   fill
+                  sizes='32px'
                   className='object-cover'
                 />
               ) : (

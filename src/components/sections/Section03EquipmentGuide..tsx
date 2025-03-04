@@ -2,6 +2,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, Download, FileText, Star } from 'lucide-react';
+import hikingEquipments from '../../public/images/hiking-equipments.jpg';
 
 export default function Section03EquipmentGuide() {
   return (
@@ -10,7 +11,7 @@ export default function Section03EquipmentGuide() {
         {/* Background Image */}
         <div className='absolute inset-0'>
           <Image
-            src='/images/equipment-guide-bg.jpg'
+            src={hikingEquipments}
             alt='Hiking equipment laid out'
             fill
             className='object-cover'

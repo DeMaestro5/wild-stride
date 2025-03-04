@@ -28,6 +28,7 @@ import tent from '../../public/images/tent.jpg';
 import waterfilter from '../../public/images/waterfilter.jpg';
 import footwear from '../../public/images/footwear.jpg';
 import hikingBoot from '../../public/images/hikingboot.jpg';
+import reviewer from '../../public/images/reviewer.jpg';
 
 // Mock data for equipment page
 // In a real app, this would come from a CMS or API
@@ -140,6 +141,7 @@ export default function Equipment() {
             alt='Mountain equipment background'
             fill
             priority
+            sizes='100vw'
             quality={100}
             style={{
               objectFit: 'cover',
@@ -176,16 +178,16 @@ export default function Equipment() {
         </div>
       </div>
 
-      {/* Content Sections - On gray background */}
+      {/* Content Sections - On gray background - REDUCED SPACING HERE */}
       <div className='bg-gray-900 text-white'>
-        <div className='container mx-auto px-4 space-y-24 md:space-y-40 py-16 md:py-24'>
+        <div className='container mx-auto px-4 space-y-12 md:space-y-20 py-2 md:py-16'>
           {/* Section 1: Equipment Overview */}
-          <section id='section-01' className='pt-16'>
+          <section id='section-01' className='pt-8'>
             <Section01EquipmentOverview />
           </section>
 
           {/* Section 2: Featured Equipment */}
-          <section id='section-02' className='pt-16'>
+          <section id='section-02' className='pt-8'>
             <FeaturedGearGrid
               title='Top Hiking Gear for 2023'
               subtitle='Expert Recommendations'
@@ -194,8 +196,8 @@ export default function Equipment() {
           </section>
 
           {/* Section 3: Equipment Categories */}
-          <section id='section-03' className='pt-16'>
-            <div className='text-center mb-16'>
+          <section id='section-03' className='pt-8'>
+            <div className='text-center mb-12'>
               <div className='flex items-center justify-center mb-4'>
                 <div className='h-px w-16 bg-yellow-400 mr-4'></div>
                 <span className='text-yellow-400 tracking-widest uppercase text-sm font-medium'>
@@ -212,8 +214,8 @@ export default function Equipment() {
               </p>
             </div>
 
-            {/* Equipment Category Cards */}
-            <div className='space-y-24'>
+            {/* Equipment Category Cards - Reduced spacing between cards */}
+            <div className='space-y-16'>
               <ContentCard
                 number='01'
                 subtitle='FOOTWEAR'
@@ -253,8 +255,8 @@ export default function Equipment() {
           </section>
 
           {/* Section 4: Backpack Comparison */}
-          <section id='section-04' className='pt-16'>
-            <div className='mb-12'>
+          <section id='section-04' className='pt-8'>
+            <div className='mb-8'>
               <div className='flex items-center mb-4'>
                 <div className='h-px w-16 bg-yellow-400 mr-4'></div>
                 <span className='text-yellow-400 tracking-widest uppercase text-sm font-medium'>
@@ -287,8 +289,8 @@ export default function Equipment() {
           </section>
 
           {/* Section 5: Featured Equipment Review */}
-          <section id='section-05' className='pt-16'>
-            <div className='mb-12'>
+          <section id='section-05' className='pt-8'>
+            <div className='mb-8'>
               <div className='flex items-center mb-4'>
                 <div className='h-px w-16 bg-yellow-400 mr-4'></div>
                 <span className='text-yellow-400 tracking-widest uppercase text-sm font-medium'>
@@ -325,7 +327,7 @@ export default function Equipment() {
               ]}
               verdict='The Trail Master Hiking Boots are a worthwhile investment for serious hikers who prioritize durability, protection, and all-weather performance. While not the lightest or most breathable option, they excel in stability and water protection, making them ideal for multi-day treks in varied conditions.'
               reviewerName='Alex Johnson'
-              reviewerImage='/images/reviewer.jpg'
+              reviewerImage={reviewer}
               reviewerTitle='Senior Gear Tester'
             />
 
@@ -341,51 +343,8 @@ export default function Equipment() {
           </section>
 
           {/* Section 6: Equipment Guide CTA */}
-          <section className='pt-16'>
+          <section className='pt-8'>
             <Section03EquipmentGuide />
-          </section>
-
-          {/* Newsletter Section */}
-          <section className='py-16'>
-            <div className='grid grid-cols-1 md:grid-cols-2 gap-12 items-center'>
-              <div>
-                <div className='flex items-center mb-4'>
-                  <div className='h-px w-16 bg-yellow-400 mr-4'></div>
-                  <span className='text-yellow-400 tracking-widest uppercase text-sm font-medium'>
-                    Stay Updated
-                  </span>
-                </div>
-                <h2 className='text-3xl md:text-4xl font-bold mb-4'>
-                  Get Gear Reviews & Deals
-                </h2>
-                <p className='text-gray-300 mb-6'>
-                  Subscribe to our equipment newsletter for exclusive deals, new
-                  gear alerts, and expert reviews straight to your inbox.
-                </p>
-              </div>
-
-              <div>
-                <form className='space-y-4'>
-                  <div className='flex flex-col sm:flex-row gap-3'>
-                    <input
-                      type='email'
-                      placeholder='Your email address'
-                      className='bg-gray-800 border border-gray-700 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-yellow-400 text-white flex-grow'
-                      required
-                    />
-                    <button
-                      type='submit'
-                      className='bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-medium px-6 py-3 rounded-md transition-colors duration-200 whitespace-nowrap'
-                    >
-                      Subscribe
-                    </button>
-                  </div>
-                  <p className='text-gray-500 text-sm'>
-                    We respect your privacy. Unsubscribe at any time.
-                  </p>
-                </form>
-              </div>
-            </div>
           </section>
         </div>
       </div>
