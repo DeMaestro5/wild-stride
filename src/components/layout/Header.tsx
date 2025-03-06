@@ -1,6 +1,6 @@
 'use client';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { User, Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { usePathname } from 'next/navigation';
@@ -19,7 +19,27 @@ const navigationItems: NavItem[] = [
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
+
+  // Add scroll event listener
+  useEffect(() => {
+    const handleScroll = () => {
+      const isScrolled = window.scrollY > 10;
+      if (isScrolled !== scrolled) {
+        setScrolled(isScrolled);
+      }
+    };
+
+    // Add event listener
+    window.addEventListener('scroll', handleScroll);
+
+    // Check initial scroll position
+    handleScroll();
+
+    // Clean up event listener
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [scrolled]);
 
   const closeMobileMenu = () => {
     setMobileMenuOpen(false);
@@ -34,7 +54,11 @@ export default function Header() {
   };
 
   return (
-    <header className='relative bg-transparent z-50'>
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled ? 'bg-slate-900/95 backdrop-blur shadow-md' : 'bg-transparent'
+      }`}
+    >
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
         <div className='flex justify-between items-center h-16'>
           {/* Logo */}
@@ -109,7 +133,7 @@ export default function Header() {
             animate={{ opacity: 1, height: 'auto', y: 0 }}
             exit={{ opacity: 0, height: 0, y: -10 }}
             transition={{ duration: 0.3, ease: 'easeInOut' }}
-            className='md:hidden absolute top-16 inset-x-0 z-50 bg-white/90 backdrop-blur-sm overflow-hidden rounded-b-lg shadow-lg'
+            className='md:hidden absolute top-16 inset-x-0 z-50 bg-slate-900/95 backdrop-blur-sm overflow-hidden rounded-b-lg shadow-lg'
           >
             <motion.div
               initial={{ opacity: 0 }}
@@ -128,8 +152,8 @@ export default function Header() {
                     href={item.href}
                     className={`block w-full px-3 py-2 rounded-md text-base font-medium relative ${
                       isActive(item.href)
-                        ? 'text-green-600 bg-gray-100/50'
-                        : 'text-gray-800 hover:text-green-600 hover:bg-gray-100/50'
+                        ? 'text-green-600 bg-gray-800/50'
+                        : 'text-gray-300 hover:text-green-600 hover:bg-gray-800/50'
                     } transition-colors duration-200`}
                     onClick={closeMobileMenu}
                   >
@@ -152,8 +176,8 @@ export default function Header() {
                   href='/account'
                   className={`flex items-center w-full px-3 py-2 rounded-md text-base font-medium relative ${
                     isActive('/account')
-                      ? 'text-green-600 bg-gray-100/50'
-                      : 'text-gray-800 hover:text-green-600 hover:bg-gray-100/50'
+                      ? 'text-green-600 bg-gray-800/50'
+                      : 'text-gray-300 hover:text-green-600 hover:bg-gray-800/50'
                   } transition-colors duration-200`}
                   onClick={closeMobileMenu}
                 >

@@ -11,62 +11,64 @@ import img1 from '../public/images/img1.jpg';
 
 export default function Home() {
   return (
-    <main className='relative min-h-screen bg-gray-900'>
-      {/* Hero Section with Background Image */}
-      <div className='relative h-screen'>
-        {/* Background Image - Only for hero section */}
-        <div className='absolute inset-0 z-0'>
-          <Image
-            src={img1}
-            alt='Mountain background'
-            fill
-            priority
-            quality={100}
-            style={{
-              objectFit: 'cover',
-              objectPosition: 'center',
-              filter: 'brightness(0.5)',
-            }}
-          />
+    <>
+      {/* Header - Now placed outside all containers to ensure it's always on top */}
+      <Header />
+
+      <main className='relative min-h-screen bg-gray-900'>
+        {/* Hero Section with Background Image */}
+        <div className='relative h-screen'>
+          {/* Background Image - Only for hero section */}
+          <div className='absolute inset-0 z-0'>
+            <Image
+              src={img1}
+              alt='Mountain background'
+              fill
+              priority
+              quality={100}
+              style={{
+                objectFit: 'cover',
+                objectPosition: 'center',
+                filter: 'brightness(0.5)',
+              }}
+            />
+          </div>
+
+          {/* Hero Content - with pt-16 to account for the header height */}
+          <div className='relative z-10 h-full pt-16'>
+            {/* Social Media Sidebar */}
+            <SocialMediaSidebar />
+
+            {/* Progress Indicator */}
+            <ProgressIndicator
+              steps={[
+                { id: 1, label: 'Start', active: true },
+                { id: 2, label: '01', active: false },
+                { id: 3, label: '02', active: false },
+                { id: 4, label: '03', active: false },
+              ]}
+            />
+
+            {/* Hero Section */}
+            <HeroSection
+              subtitle='A HIKING GUIDE'
+              title='Be Prepared For The Mountains And Beyond!'
+            />
+          </div>
         </div>
 
-        {/* Header */}
-        <Header />
-
-        {/* Hero Content */}
-        <div className='relative z-10 h-full'>
-          {/* Social Media Sidebar */}
-          <SocialMediaSidebar />
-
-          {/* Progress Indicator */}
-          <ProgressIndicator
-            steps={[
-              { id: 1, label: 'Start', active: true },
-              { id: 2, label: '01', active: false },
-              { id: 3, label: '02', active: false },
-              { id: 4, label: '03', active: false },
-            ]}
-          />
-
-          {/* Hero Section */}
-          <HeroSection
-            subtitle='A HIKING GUIDE'
-            title='Be Prepared For The Mountains And Beyond!'
-          />
+        {/* Content Sections - On gray background */}
+        <div className='bg-gray-900 text-white'>
+          <div className='container mx-auto px-4 space-y-16 md:space-y-32 py-16 md:py-24'>
+            <Section01Hiker />
+            <Section02Gear />
+            <Section03Map />
+          </div>
         </div>
-      </div>
 
-      {/* Content Sections - On gray background */}
-      <div className='bg-gray-900 text-white'>
-        <div className='container mx-auto px-4 space-y-16 md:space-y-32 py-16 md:py-24'>
-          <Section01Hiker />
-          <Section02Gear />
-          <Section03Map />
-        </div>
-      </div>
-
-      {/* Footer */}
-      <Footer />
-    </main>
+        {/* Footer */}
+        <Footer />
+      </main>
+    </>
   );
 }
