@@ -5,7 +5,6 @@ import { StaticImageData } from 'next/image';
 import Header from '../../components/layout/Header';
 import Footer from '../../components/layout/Footer';
 import SocialMediaSidebar from '../../components/ui/SocialMediaSidebar';
-import ProgressIndicator from '../../components/ui/ProgressIndicator';
 import Image from 'next/image';
 import Link from 'next/link';
 import {
@@ -158,15 +157,6 @@ export default function Account() {
         <div className='relative z-10 h-full'>
           {/* Social Media Sidebar */}
           <SocialMediaSidebar />
-
-          {/* Progress Indicator */}
-          <ProgressIndicator
-            steps={accountTabs.map((tab, index) => ({
-              id: index + 1,
-              label: tab.label,
-              active: tab.id === activeTab,
-            }))}
-          />
 
           {/* Hero Section - Simpler for account page */}
           <div className='flex h-full items-center justify-center text-center px-4'>
