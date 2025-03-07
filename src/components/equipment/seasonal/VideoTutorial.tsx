@@ -2,20 +2,20 @@
 'use client';
 
 import React, { useState } from 'react';
-import Image from 'next/image';
+import Image, { StaticImageData } from 'next/image';
 import { Play, Pause, Volume2, VolumeX, Maximize, X } from 'lucide-react';
 
 interface Expert {
   name: string;
   title: string;
-  avatar: string;
+  avatar: string | StaticImageData;
 }
 
 interface VideoTutorialProps {
   title: string;
   description: string;
   videoId: string;
-  thumbnailUrl: string;
+  thumbnailUrl: string | StaticImageData;
   duration: string;
   expert: Expert;
 }

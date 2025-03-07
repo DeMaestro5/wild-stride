@@ -42,6 +42,9 @@ import winterSustainability from '../../data/equipments/seasonal/winter/winterSu
 import winterSafetyTips from '../../data/equipments/seasonal/winter/winterSafetyTips';
 import winterEquipmentGuide from '../../data/equipments/seasonal/winter/winterEquipmentGuide';
 
+import videoThumbnail from '../../../public/images/img6.jpg';
+import alex from '../../../public/images/guy1.jpg';
+
 export default function SeasonalEquipment() {
   // Default to winter season initially
   const [activeSeason, setActiveSeason] = useState('winter');
@@ -254,12 +257,12 @@ export default function SeasonalEquipment() {
               title={`How to Layer for ${currentSeason.name} Hiking`}
               description={`Our gear expert demonstrates the perfect layering strategy for ${currentSeason.name.toLowerCase()} hiking in temperatures from 0°F to 30°F.`}
               videoId='winter-layering-101'
-              thumbnailUrl='/images/seasonal/video-thumbnail.jpg'
+              thumbnailUrl={videoThumbnail}
               duration='8:24'
               expert={{
                 name: 'Alex Rivera',
                 title: `${currentSeason.name} Hiking Specialist`,
-                avatar: '/images/experts/alex.jpg',
+                avatar: alex,
               }}
             />
           </section>
