@@ -13,7 +13,7 @@ import Section03EquipmentGuide from '../../components/sections/Section03Equipmen
 import EquipmentComparison from '../../components/equipment/EquipmentComparison';
 import EquipmentReview from '../../components/equipment/EquipmentReview';
 // Fix the import name to match the actual component
-import FeaturedGearGrid from '../../components/equipment/FeatureGearItem';
+import FeaturedGearGrid from '../../components/equipment/FeatureGearGrid';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';

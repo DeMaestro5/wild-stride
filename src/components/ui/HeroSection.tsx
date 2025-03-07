@@ -1,12 +1,18 @@
 import { ChevronDown } from 'lucide-react';
+import { ReactNode } from 'react';
 
-// Define HeroSection props type
+// Updated HeroSection props type to include extraContent
 export interface HeroSectionProps {
   subtitle: string;
   title: string;
+  extraContent?: ReactNode; // Made optional with ?
 }
 
-export default function HeroSection({ subtitle, title }: HeroSectionProps) {
+export default function HeroSection({
+  subtitle,
+  title,
+  extraContent,
+}: HeroSectionProps) {
   return (
     <section className='relative min-h-screen flex items-center justify-center pt-24 pb-24 px-4'>
       <div className='max-w-4xl mx-auto text-center md:text-left'>
@@ -22,6 +28,9 @@ export default function HeroSection({ subtitle, title }: HeroSectionProps) {
         <h1 className='text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight mb-16 text-gray-100'>
           {title}
         </h1>
+
+        {/* Extra Content */}
+        {extraContent && extraContent}
 
         {/* Scroll Down Indicator */}
         <div className='flex items-center justify-center md:justify-start space-x-2 mt-16'>

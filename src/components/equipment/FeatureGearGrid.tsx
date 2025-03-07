@@ -12,18 +12,21 @@ export interface FeaturedGearItem {
   image: string | StaticImageData;
   url: string;
   featured?: boolean;
+  seasonalTag?: string; // Added to support seasonal tags
 }
 
 interface FeaturedGearGridProps {
   title: string;
   subtitle: string;
   items: FeaturedGearItem[];
+  showSeasonalTags?: boolean;
 }
 
 export default function FeaturedGearGrid({
   title,
   subtitle,
   items,
+  showSeasonalTags = false, // Add this parameter with default value
 }: FeaturedGearGridProps) {
   // Find the featured item (if any)
   const featuredItem = items.find((item) => item.featured);
@@ -63,6 +66,12 @@ export default function FeaturedGearGrid({
                 <span className='ml-2 bg-gray-800 text-white px-3 py-1 rounded-full text-xs font-medium'>
                   Featured
                 </span>
+                {/* Add seasonal tag if enabled and available */}
+                {showSeasonalTags && featuredItem.seasonalTag && (
+                  <span className='ml-2 bg-blue-600 text-white px-3 py-1 rounded-full text-xs font-medium'>
+                    {featuredItem.seasonalTag}
+                  </span>
+                )}
               </div>
 
               <h3 className='text-2xl font-bold text-white mb-3'>
@@ -103,6 +112,12 @@ export default function FeaturedGearGrid({
                 <span className='bg-gray-800 text-white px-3 py-1 rounded-full text-xs font-medium'>
                   {item.category}
                 </span>
+                {/* Add seasonal tag if enabled and available */}
+                {showSeasonalTags && item.seasonalTag && (
+                  <span className='ml-2 bg-blue-600 text-white px-3 py-1 rounded-full text-xs font-medium'>
+                    {item.seasonalTag}
+                  </span>
+                )}
               </div>
 
               <h3 className='text-xl font-bold text-white mb-2'>{item.name}</h3>
@@ -124,56 +139,3 @@ export default function FeaturedGearGrid({
     </section>
   );
 }
-
-// Usage example:
-/*
-const featuredGear = [
-  {
-    id: 1,
-    name: "Ultimate Trekking Pole Set",
-    description: "Lightweight, collapsible trekking poles with cork handles and carbide tips for maximum grip and stability on any terrain.",
-    category: "Accessories",
-    image: "/images/trekking-poles.jpg",
-    url: "/equipment/accessories/trekking-poles",
-    featured: true
-  },
-  {
-    id: 2,
-    name: "Lightweight Down Jacket",
-    description: "800-fill down insulation in an ultralight package that compresses to the size of a water bottle.",
-    category: "Clothing",
-    image: "/images/down-jacket.jpg",
-    url: "/equipment/clothing/down-jacket"
-  },
-  {
-    id: 3,
-    name: "Trail Runner Pro 5",
-    description: "The perfect balance of grip, cushioning, and protection for technical trail running.",
-    category: "Footwear",
-    image: "/images/trail-runners.jpg",
-    url: "/equipment/footwear/trail-runners"
-  },
-  {
-    id: 4,
-    name: "Ultralight Tent 2P",
-    description: "A spacious two-person tent weighing just under 2 pounds.",
-    category: "Shelter",
-    image: "/images/tent.jpg",
-    url: "/equipment/shelter/ultralight-tent"
-  },
-  {
-    id: 5,
-    name: "Water Filtration System",
-    description: "Compact filter that removes 99.999% of bacteria and protozoa from any water source.",
-    category: "Water",
-    image: "/images/water-filter.jpg",
-    url: "/equipment/water/filtration"
-  }
-];
-
-<FeaturedGearGrid 
-  title="Top Hiking Gear for 2023" 
-  subtitle="Expert Recommendations" 
-  items={featuredGear} 
-/>
-*/

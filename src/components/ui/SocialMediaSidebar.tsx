@@ -28,7 +28,7 @@ const socialLinks: SocialLink[] = [
 
 export default function SocialSidebar() {
   return (
-    <div className='fixed left-6 top-1/2 transform -translate-y-1/2 z-20 hidden lg:block'>
+    <div className='fixed left-6 top-1/2 transform -translate-y-1/2 z-50 hidden lg:block'>
       <div className='flex flex-col items-center space-y-6'>
         {/* Vertical Text */}
         <span className='text-sm tracking-widest transform -rotate-90 mb-8 origin-center whitespace-nowrap text-gray-200'>
