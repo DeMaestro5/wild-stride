@@ -5,7 +5,7 @@ import { ArrowRight } from 'lucide-react';
 
 // Define Featured Gear Item type
 export interface FeaturedGearItem {
-  id: number;
+  id: number | string;
   name: string;
   description: string;
   category: string;

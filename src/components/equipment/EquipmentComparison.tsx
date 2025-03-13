@@ -3,7 +3,7 @@ import { Star } from 'lucide-react';
 
 // Define comparison item type
 export interface ComparisonItem {
-  id: number;
+  id: number | string;
   name: string;
   price: string;
   rating: number;

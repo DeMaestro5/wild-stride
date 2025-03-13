@@ -1,13 +1,13 @@
 // components/sections/SeasonalEquipmentGuide.tsx
 import React from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
+import Image, { StaticImageData } from 'next/image';
 import { Download, Check } from 'lucide-react';
 
 interface SeasonalEquipmentGuideProps {
   title: string;
   description: string;
-  coverImage: string;
+  coverImage: string | StaticImageData;
   downloadUrl: string;
   features: string[];
 }

@@ -6,44 +6,44 @@ import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 
 // Layout Components
-import Header from '../../../components/layout/Header';
-import Footer from '../../../components/layout/Footer';
-import HeroSection from '../../../components/ui/HeroSection';
-import SocialMediaSidebar from '../../../components/ui/SocialMediaSidebar';
-import ProgressIndicator from '../../../components/ui/ProgressIndicator';
+import Header from '../../../../components/layout/Header';
+import Footer from '../../../../components/layout/Footer';
+import HeroSection from '../../../../components/ui/HeroSection';
+import SocialMediaSidebar from '../../../../components/ui/SocialMediaSidebar';
+import ProgressIndicator from '../../../../components/ui/ProgressIndicator';
 
 // Feature Components
-import SeasonSelector from '../../../components/equipment/seasonal/SeasonSelector';
-import WeatherConditionCard from '../../../components/equipment/seasonal/WeatherConditionCard';
-import FeaturedGearGrid from '../../../components/equipment/FeatureGearGrid';
-import LayeringSystem from '../../../components/equipment/seasonal/LayerindSystem';
-import VideoTutorial from '../../../components/equipment/seasonal/VideoTutorial';
-import SeasonalPackingList from '../../../components/equipment/seasonal/SeasonalPackingList';
-import EquipmentComparison from '../../../components/equipment/EquipmentComparison';
-import SeasonalTrailMap from '../../../components/equipment/seasonal/SeasonalTrailMap';
-import GearMaintenanceTips from '../../../components/equipment/seasonal/GearMaintenanceTips';
-import TestimonialSlider from '../../../components/equipment/seasonal/TestimonialSlider';
-import SustainabilityFeature from '../../../components/equipment/seasonal/SustainabilityFeatures';
-import SeasonalTips from '../../../components/equipment/seasonal/SeasonalTips';
-import SeasonalEquipmentGuide from '../../../components/equipment/seasonal/SeasonalEquipmentGuide';
+import SeasonSelector from '../../../../components/equipment/seasonal/SeasonSelector';
+import WeatherConditionCard from '../../../../components/equipment/seasonal/WeatherConditionCard';
+import FeaturedGearGrid from '../../../../components/equipment/FeatureGearGrid';
+import LayeringSystem from '../../../../components/equipment/seasonal/LayerindSystem';
+import VideoTutorial from '../../../../components/equipment/seasonal/VideoTutorial';
+import SeasonalPackingList from '../../../../components/equipment/seasonal/SeasonalPackingList';
+import EquipmentComparison from '../../../../components/equipment/EquipmentComparison';
+import SeasonalTrailMap from '../../../../components/equipment/seasonal/SeasonalTrailMap';
+import GearMaintenanceTips from '../../../../components/equipment/seasonal/GearMaintenanceTips';
+import TestimonialSlider from '../../../../components/equipment/seasonal/TestimonialSlider';
+import SustainabilityFeature from '../../../../components/equipment/seasonal/SustainabilityFeatures';
+import SeasonalTips from '../../../../components/equipment/seasonal/SeasonalTips';
+import SeasonalEquipmentGuide from '../../../../components/equipment/seasonal/SeasonalEquipmentGuide';
 // import SeasonalSalesAlert from '../../../components/equipment/seasonal/SeasonalSales';
 
 // Data Imports
-import seasons from '../../data/equipments/seasonal/Season';
-import winterFeaturedGear from '../../data/equipments/seasonal/winter/winterFeatureGear';
-import winterConditions from '../../data/equipments/seasonal/winter/winterConditions';
-import winterPackingList from '../../data/equipments/seasonal/winter/winterPackingList';
-import winterLayeringSystem from '../../data/equipments/seasonal/winter/winterLayeringSystem';
-import winterBootComparison from '../../data/equipments/seasonal/winter/winterBootsComparison';
-import winterTrails from '../../data/equipments/seasonal/winter/winterTrails';
-import winterTestimonials from '../../data/equipments/seasonal/winter/winterTestimonial';
-import winterMaintenanceTips from '../../data/equipments/seasonal/winter/winterMaintenanceTips';
-import winterSustainability from '../../data/equipments/seasonal/winter/winterSustainabiliy';
-import winterSafetyTips from '../../data/equipments/seasonal/winter/winterSafetyTips';
-import winterEquipmentGuide from '../../data/equipments/seasonal/winter/winterEquipmentGuide';
+import seasons from '../../../data/equipments/seasonal/Season';
+import winterFeaturedGear from '../../../data/equipments/seasonal/winter/winterFeatureGear';
+import winterConditions from '../../../data/equipments/seasonal/winter/winterConditions';
+import winterPackingList from '../../../data/equipments/seasonal/winter/winterPackingList';
+import winterLayeringSystem from '../../../data/equipments/seasonal/winter/winterLayeringSystem';
+import winterBootComparison from '../../../data/equipments/seasonal/winter/winterBootsComparison';
+import winterTrails from '../../../data/equipments/seasonal/winter/winterTrails';
+import winterTestimonials from '../../../data/equipments/seasonal/winter/winterTestimonial';
+import winterMaintenanceTips from '../../../data/equipments/seasonal/winter/winterMaintenanceTips';
+import winterSustainability from '../../../data/equipments/seasonal/winter/winterSustainabiliy';
+import winterSafetyTips from '../../../data/equipments/seasonal/winter/winterSafetyTips';
+import winterEquipmentGuide from '../../../data/equipments/seasonal/winter/winterEquipmentGuide';
 
-import videoThumbnail from '../../../public/images/img6.jpg';
-import alex from '../../../public/images/guy1.jpg';
+import videoThumbnail from '../../../../public/images/img6.jpg';
+import alex from '../../../../public/images/guy1.jpg';
 
 export default function SeasonalEquipment() {
   // Default to winter season initially

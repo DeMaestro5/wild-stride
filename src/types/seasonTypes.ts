@@ -129,7 +129,7 @@ export interface Testimonial {
   id: number;
   name: string;
   location: string;
-  image: string;
+  image: string | StaticImageData;
   quote: string;
   rating: number;
   productReference?: string;

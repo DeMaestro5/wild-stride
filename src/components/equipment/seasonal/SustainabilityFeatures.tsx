@@ -67,7 +67,7 @@ const SustainabilityFeature: React.FC<SustainabilityFeatureProps> = ({
           {stats.map((stat, index) => (
             <div
               key={index}
-              className='bg-white bg-opacity-10 rounded-lg p-6 backdrop-blur-sm'
+              className='bg-amber-500 bg-opacity-10 rounded-lg p-6 backdrop-blur-sm'
             >
               <div className='flex flex-col h-full'>
                 <span className='text-green-400 text-3xl md:text-4xl font-bold mb-2'>
@@ -76,13 +76,13 @@ const SustainabilityFeature: React.FC<SustainabilityFeatureProps> = ({
                 <h3 className='text-white text-lg font-medium mb-2'>
                   {stat.label}
                 </h3>
-                <p className='text-gray-300 text-sm'>{stat.description}</p>
+                <p className='text-gray-100 text-sm'>{stat.description}</p>
               </div>
             </div>
           ))}
         </div>
 
-        <div className='bg-white bg-opacity-10 rounded-lg p-6 backdrop-blur-sm'>
+        <div className='bg-amber-500 bg-opacity-10 rounded-lg p-6 backdrop-blur-sm'>
           <h3 className='text-white text-lg font-medium mb-4'>
             Featured Sustainable Brands
           </h3>

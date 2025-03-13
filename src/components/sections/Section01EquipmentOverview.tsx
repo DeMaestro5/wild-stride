@@ -61,7 +61,7 @@ export default function Section01EquipmentOverview() {
           icon={<Clock className='h-8 w-8 text-yellow-400' />}
           title='Seasonal Gear'
           description='Equipment recommendations tailored to spring, summer, fall, and winter conditions.'
-          linkUrl='/equipment/seasonal'
+          linkUrl='/equipment/seasonal/winter'
         />
 
         <CategoryFeatureCard
