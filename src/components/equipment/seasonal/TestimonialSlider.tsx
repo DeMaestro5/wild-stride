@@ -1,10 +1,10 @@
-// components/ui/TestimonialSlider.tsx
+// components/equipment/seasonal/TestimonialSlider.tsx
 'use client';
 
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { ChevronLeft, ChevronRight, Star, StarHalf } from 'lucide-react';
-import { Testimonial } from '../../../types/seasonTypes';
+import { Testimonial } from '../../../types/summerTypes';
 
 interface TestimonialSliderProps {
   testimonials: Testimonial[];
@@ -124,9 +124,15 @@ const TestimonialSlider: React.FC<TestimonialSliderProps> = ({
                   </h4>
                   <p className='text-gray-400'>{testimonial.location}</p>
 
-                  {testimonial.productReference && (
+                  {testimonial.trailName && (
                     <p className='text-yellow-400 mt-2 text-sm'>
-                      Used: {testimonial.productReference}
+                      Hiked: {testimonial.trailName}
+                    </p>
+                  )}
+
+                  {testimonial.gear && testimonial.gear.length > 0 && (
+                    <p className='text-blue-400 mt-1 text-sm'>
+                      Used: {testimonial.gear.join(', ')}
                     </p>
                   )}
                 </div>

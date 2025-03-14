@@ -4,7 +4,7 @@ import Image, { StaticImageData } from 'next/image';
 import { MapPin, Maximize, ZoomIn, ZoomOut } from 'lucide-react';
 
 interface SeasonalTrailMapProps {
-  mapImage: StaticImageData;
+  mapImage: StaticImageData | string;
   mapAlt: string;
   regionName: string;
   highlightedTrails?: Array<{

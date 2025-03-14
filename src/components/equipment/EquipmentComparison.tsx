@@ -1,26 +1,30 @@
-// components/ui/EquipmentComparison.tsx
+// components/equipment/EquipmentComparison.tsx
 import { Star } from 'lucide-react';
 
-// Define comparison item type
+// Update ComparisonItem to be more compatible with BootComparisonItem
 export interface ComparisonItem {
-  id: number | string;
+  id: string;
   name: string;
-  price: string;
+  brand: string;
+  price: number; // Changed from string to number
   rating: number;
-  weightKg?: number; // Make weightKg optional with ?
+  reviewCount?: number;
   features: string[];
   bestFor: string;
-  waterproof: boolean;
-  durability: 'Low' | 'Medium' | 'High';
-  // Add potential boot-specific properties
+  waterproof: string; // Changed from boolean to string ('Yes', 'No', 'Partial')
+  durability: 'Low' | 'Medium' | 'High' | 'Very High'; // Added 'Very High'
+
+  // Add all the fields from BootComparisonItem
+  imageUrl?: string;
   temperature?: string;
-  insulation?: string;
+  ventilation?: string;
+  weight?: string;
+  recommendedUse?: string[];
 }
 
 interface EquipmentComparisonProps {
   category: string;
   items: ComparisonItem[];
-  // Add a parameter to specify which fields to display
   comparisonFields?: string[];
 }
 
@@ -39,6 +43,28 @@ export default function EquipmentComparison({
   // Helper function to check if a field should be shown
   const shouldShowField = (field: string) => comparisonFields.includes(field);
 
+  // Helper function to format price with improved error handling
+  const formatPrice = (price: number | string) => {
+    // Handle the case where price might be a string despite the type declaration
+    if (typeof price === 'string') {
+      // Try to convert string to number if possible
+      const numPrice = parseFloat(price);
+      if (!isNaN(numPrice)) {
+        return `$${numPrice.toFixed(2)}`;
+      }
+      // If it's a string but can't be converted to a valid number
+      return price.startsWith('$') ? price : `$${price}`;
+    }
+
+    // Handle case where price is a proper number
+    if (typeof price === 'number' && !isNaN(price)) {
+      return `$${price.toFixed(2)}`;
+    }
+
+    // Fallback for any other unexpected cases
+    return 'Price unavailable';
+  };
+
   return (
     <div className='w-full overflow-x-auto pb-4'>
       <table className='min-w-full divide-y divide-gray-700'>
@@ -55,7 +81,10 @@ export default function EquipmentComparison({
                 <div className='text-white font-bold text-base'>
                   {item.name}
                 </div>
-                <div className='text-yellow-400 mt-1'>{item.price}</div>
+                <div className='text-sm text-gray-400'>{item.brand}</div>
+                <div className='text-yellow-400 mt-1'>
+                  {formatPrice(item.price)}
+                </div>
               </th>
             ))}
           </tr>
@@ -83,6 +112,11 @@ export default function EquipmentComparison({
                     <span className='ml-2 text-sm text-gray-400'>
                       {item.rating}/5
                     </span>
+                    {item.reviewCount && (
+                      <span className='ml-1 text-xs text-gray-500'>
+                        ({item.reviewCount} reviews)
+                      </span>
+                    )}
                   </div>
                 </td>
               ))}
@@ -98,7 +132,7 @@ export default function EquipmentComparison({
                   key={`weight-${item.id}`}
                   className='px-4 py-4 text-center text-white'
                 >
-                  {item.weightKg ? `${item.weightKg} kg` : 'N/A'}
+                  {item.weight || 'N/A'}
                 </td>
               ))}
             </tr>
@@ -121,16 +155,16 @@ export default function EquipmentComparison({
             </tr>
           )}
 
-          {/* Insulation Row (for boots) */}
-          {shouldShowField('insulation') && (
+          {/* Ventilation Row (for boots) */}
+          {shouldShowField('ventilation') && (
             <tr>
-              <td className='px-4 py-4 text-sm text-gray-300'>Insulation</td>
+              <td className='px-4 py-4 text-sm text-gray-300'>Ventilation</td>
               {items.map((item) => (
                 <td
-                  key={`insulation-${item.id}`}
+                  key={`ventilation-${item.id}`}
                   className='px-4 py-4 text-center text-white'
                 >
-                  {item.insulation || 'None'}
+                  {item.ventilation || 'N/A'}
                 </td>
               ))}
             </tr>
@@ -138,7 +172,7 @@ export default function EquipmentComparison({
 
           {/* Best For Row */}
           {shouldShowField('bestFor') && (
-            <tr className={shouldShowField('insulation') ? '' : 'bg-gray-800'}>
+            <tr className={shouldShowField('ventilation') ? 'bg-gray-800' : ''}>
               <td className='px-4 py-4 text-sm text-gray-300'>Best For</td>
               {items.map((item) => (
                 <td
@@ -162,12 +196,14 @@ export default function EquipmentComparison({
                 >
                   <span
                     className={`inline-flex px-2 py-1 text-xs rounded-full ${
-                      item.waterproof
+                      item.waterproof === 'Yes'
                         ? 'bg-green-900 text-green-300'
+                        : item.waterproof === 'Partial'
+                        ? 'bg-yellow-900 text-yellow-300'
                         : 'bg-gray-700 text-gray-400'
                     }`}
                   >
-                    {item.waterproof ? 'Yes' : 'No'}
+                    {item.waterproof}
                   </span>
                 </td>
               ))}
@@ -185,7 +221,9 @@ export default function EquipmentComparison({
                 >
                   <span
                     className={`inline-flex px-2 py-1 text-xs rounded-full ${
-                      item.durability === 'High'
+                      item.durability === 'Very High'
+                        ? 'bg-blue-900 text-blue-300'
+                        : item.durability === 'High'
                         ? 'bg-green-900 text-green-300'
                         : item.durability === 'Medium'
                         ? 'bg-yellow-900 text-yellow-300'
@@ -215,6 +253,33 @@ export default function EquipmentComparison({
                       </li>
                     ))}
                   </ul>
+                </td>
+              ))}
+            </tr>
+          )}
+
+          {/* Recommended Use Row (for boots) */}
+          {shouldShowField('recommendedUse') && (
+            <tr className='bg-gray-800'>
+              <td className='px-4 py-4 text-sm text-gray-300'>
+                Recommended Use
+              </td>
+              {items.map((item) => (
+                <td
+                  key={`recommendedUse-${item.id}`}
+                  className='px-4 py-4 text-center'
+                >
+                  {item.recommendedUse ? (
+                    <ul className='text-sm text-white list-disc list-inside text-left'>
+                      {item.recommendedUse.map((use, idx) => (
+                        <li key={idx} className='mb-1'>
+                          {use}
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    'N/A'
+                  )}
                 </td>
               ))}
             </tr>

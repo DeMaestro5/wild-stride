@@ -12,7 +12,7 @@ export interface FeaturedGearItem {
   image: string | StaticImageData;
   url: string;
   featured?: boolean;
-  seasonalTag?: string; // Added to support seasonal tags
+  seasonalTag?: string;
 }
 
 interface FeaturedGearGridProps {

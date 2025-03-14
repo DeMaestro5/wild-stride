@@ -1,13 +1,14 @@
-// components/equipment/SeasonalPackingList.tsx
+// components/equipment/seasonal/SeasonalPackingList.tsx
 'use client';
 
 import React, { useState } from 'react';
 import { Check, Download, Clipboard, ClipboardCheck } from 'lucide-react';
 import Link from 'next/link';
+import { PackingItem } from '../../../types/summerTypes';
 
 interface SeasonalPackingListProps {
-  essentialItems: string[];
-  optionalItems: string[];
+  essentialItems: PackingItem[];
+  optionalItems: PackingItem[];
   seasonName: string;
   downloadUrl: string;
 }
@@ -26,29 +27,80 @@ const SeasonalPackingList: React.FC<SeasonalPackingListProps> = ({
   }>({});
   const [copied, setCopied] = useState(false);
 
-  const toggleEssentialItem = (item: string) => {
+  const toggleEssentialItem = (itemId: string) => {
     setCheckedEssential((prev) => ({
       ...prev,
-      [item]: !prev[item],
+      [itemId]: !prev[itemId],
     }));
   };
 
-  const toggleOptionalItem = (item: string) => {
+  const toggleOptionalItem = (itemId: string) => {
     setCheckedOptional((prev) => ({
       ...prev,
-      [item]: !prev[item],
+      [itemId]: !prev[itemId],
     }));
   };
 
   const copyToClipboard = () => {
-    const essentialText = essentialItems.map((item) => `□ ${item}`).join('\n');
-    const optionalText = optionalItems.map((item) => `□ ${item}`).join('\n');
+    const essentialText = essentialItems
+      .map((item) => `□ ${item.name} - ${item.description}`)
+      .join('\n');
+    const optionalText = optionalItems
+      .map((item) => `□ ${item.name} - ${item.description}`)
+      .join('\n');
     const fullText = `${seasonName.toUpperCase()} HIKING CHECKLIST\n\nESSENTIAL ITEMS:\n${essentialText}\n\nOPTIONAL ITEMS:\n${optionalText}`;
 
     navigator.clipboard.writeText(fullText).then(() => {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     });
+  };
+
+  // Function to get appropriate icon or fallback to emoji
+  const getItemIcon = (iconName: string) => {
+    // This function could be expanded to map icon names to actual icon components
+    // For now, we'll use a simple emoji mapping
+    const iconMap: { [key: string]: string } = {
+      shirt: '👕',
+      pants: '👖',
+      hat: '🧢',
+      water: '💧',
+      sun: '☀️',
+      glasses: '🕶️',
+      shoe: '👟',
+      bug: '🦟',
+      jacket: '🧥',
+      firstaid: '🩹',
+      nutrition: '🧂',
+      clothing: '👚',
+      backpack: '🎒',
+      towel: '🧻',
+      shield: '🛡️',
+      filter: '🚰',
+      net: '🕸️',
+      sandal: '👡',
+      poles: '🥢',
+      medical: '💊',
+      umbrella: '☂️',
+    };
+
+    return iconMap[iconName] || '📦'; // Default to a generic box emoji
+  };
+
+  // Helper function to display the importance level with appropriate color
+  const getImportanceColor = (importance: string) => {
+    switch (importance) {
+      case 'critical':
+        return 'text-red-400';
+      case 'high':
+        return 'text-yellow-400';
+      case 'medium':
+        return 'text-blue-400';
+      case 'variable':
+        return 'text-purple-400';
+      default:
+        return 'text-gray-400';
+    }
   };
 
   return (
@@ -89,23 +141,38 @@ const SeasonalPackingList: React.FC<SeasonalPackingListProps> = ({
             {essentialItems.map((item, index) => (
               <li
                 key={index}
-                className={`flex items-center text-white transition-all duration-200 ${
-                  checkedEssential[item] ? 'opacity-50 line-through' : ''
+                className={`flex items-start text-white transition-all duration-200 ${
+                  checkedEssential[item.name] ? 'opacity-50 line-through' : ''
                 }`}
               >
                 <button
-                  onClick={() => toggleEssentialItem(item)}
-                  className={`w-5 h-5 mr-3 rounded border flex-shrink-0 flex items-center justify-center ${
-                    checkedEssential[item]
+                  onClick={() => toggleEssentialItem(item.name)}
+                  className={`w-5 h-5 mt-1 mr-3 rounded border flex-shrink-0 flex items-center justify-center ${
+                    checkedEssential[item.name]
                       ? 'bg-green-500 border-green-500'
                       : 'border-gray-500 hover:border-white'
                   }`}
                 >
-                  {checkedEssential[item] && (
+                  {checkedEssential[item.name] && (
                     <Check className='h-4 w-4 text-white' />
                   )}
                 </button>
-                {item}
+                <div>
+                  <div className='flex items-center'>
+                    <span className='mr-2'>{getItemIcon(item.icon)}</span>
+                    <span className='font-medium'>{item.name}</span>
+                    <span
+                      className={`ml-2 text-xs ${getImportanceColor(
+                        item.importance
+                      )}`}
+                    >
+                      ({item.importance})
+                    </span>
+                  </div>
+                  <p className='text-sm text-gray-400 mt-1'>
+                    {item.description}
+                  </p>
+                </div>
               </li>
             ))}
           </ul>
@@ -120,23 +187,38 @@ const SeasonalPackingList: React.FC<SeasonalPackingListProps> = ({
             {optionalItems.map((item, index) => (
               <li
                 key={index}
-                className={`flex items-center text-white transition-all duration-200 ${
-                  checkedOptional[item] ? 'opacity-50 line-through' : ''
+                className={`flex items-start text-white transition-all duration-200 ${
+                  checkedOptional[item.name] ? 'opacity-50 line-through' : ''
                 }`}
               >
                 <button
-                  onClick={() => toggleOptionalItem(item)}
-                  className={`w-5 h-5 mr-3 rounded border flex-shrink-0 flex items-center justify-center ${
-                    checkedOptional[item]
+                  onClick={() => toggleOptionalItem(item.name)}
+                  className={`w-5 h-5 mt-1 mr-3 rounded border flex-shrink-0 flex items-center justify-center ${
+                    checkedOptional[item.name]
                       ? 'bg-green-500 border-green-500'
                       : 'border-gray-500 hover:border-white'
                   }`}
                 >
-                  {checkedOptional[item] && (
+                  {checkedOptional[item.name] && (
                     <Check className='h-4 w-4 text-white' />
                   )}
                 </button>
-                {item}
+                <div>
+                  <div className='flex items-center'>
+                    <span className='mr-2'>{getItemIcon(item.icon)}</span>
+                    <span className='font-medium'>{item.name}</span>
+                    <span
+                      className={`ml-2 text-xs ${getImportanceColor(
+                        item.importance
+                      )}`}
+                    >
+                      ({item.importance})
+                    </span>
+                  </div>
+                  <p className='text-sm text-gray-400 mt-1'>
+                    {item.description}
+                  </p>
+                </div>
               </li>
             ))}
           </ul>

@@ -1,15 +1,16 @@
-// components/sections/SeasonalEquipmentGuide.tsx
+// components/equipment/seasonal/SeasonalEquipmentGuide.tsx
 import React from 'react';
 import Link from 'next/link';
 import Image, { StaticImageData } from 'next/image';
-import { Download, Check } from 'lucide-react';
+import { Download, Check, BookOpen, Award, Users } from 'lucide-react';
+import { EquipmentGuideFeature } from '../../../types/summerTypes';
 
 interface SeasonalEquipmentGuideProps {
   title: string;
   description: string;
   coverImage: string | StaticImageData;
   downloadUrl: string;
-  features: string[];
+  features: EquipmentGuideFeature[]; // Changed from string[] to EquipmentGuideFeature[]
 }
 
 const SeasonalEquipmentGuide: React.FC<SeasonalEquipmentGuideProps> = ({
@@ -19,6 +20,23 @@ const SeasonalEquipmentGuide: React.FC<SeasonalEquipmentGuideProps> = ({
   downloadUrl,
   features,
 }) => {
+  // Helper function to render the appropriate icon
+  const renderIcon = (
+    iconName: string,
+    className: string = 'h-5 w-5 text-green-500 mr-3 mt-0.5 flex-shrink-0'
+  ) => {
+    switch (iconName) {
+      case 'book':
+        return <BookOpen className={className} />;
+      case 'award':
+        return <Award className={className} />;
+      case 'users':
+        return <Users className={className} />;
+      default:
+        return <Check className={className} />;
+    }
+  };
+
   return (
     <div className='bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl overflow-hidden shadow-xl border border-gray-700'>
       <div className='p-8 md:p-12'>
@@ -50,9 +68,16 @@ const SeasonalEquipmentGuide: React.FC<SeasonalEquipmentGuideProps> = ({
               </h3>
               <ul className='space-y-3'>
                 {features.map((feature, index) => (
-                  <li key={index} className='flex items-start text-gray-300'>
-                    <Check className='h-5 w-5 text-green-500 mr-3 mt-0.5 flex-shrink-0' />
-                    {feature}
+                  <li key={index} className='flex items-start'>
+                    {renderIcon(feature.icon)}
+                    <div>
+                      <span className='text-white font-medium'>
+                        {feature.title}
+                      </span>
+                      <p className='text-gray-400 text-sm mt-1'>
+                        {feature.description}
+                      </p>
+                    </div>
                   </li>
                 ))}
               </ul>
